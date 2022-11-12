@@ -3,6 +3,7 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import time
 import torch
 from transformers import T5ForConditionalGeneration,T5Tokenizer
+from transformers import GPT2Tokenizer, GPT2Model
 import random
 import spacy
 import zipfile
@@ -36,9 +37,10 @@ class QGen:
     
     def __init__(self):
         
-        
-        self.tokenizer = T5Tokenizer.from_pretrained('t5-base')
-        model = T5ForConditionalGeneration.from_pretrained('Parth/result')
+        self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+        model = GPT2Model.from_pretrained('gpt2')
+        # self.tokenizer = T5Tokenizer.from_pretrained('t5-base')
+        # model = T5ForConditionalGeneration.from_pretrained('Parth/result')
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model.to(device)
         # model.eval()

@@ -1,5 +1,6 @@
 import torch
 from transformers import T5ForConditionalGeneration,T5Tokenizer
+from transformers import GPT2Tokenizer, GPT2Model
 
 
 def greedy_decoding (inp_ids,attn_mask,model,tokenizer):

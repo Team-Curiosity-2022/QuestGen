@@ -24,6 +24,8 @@ from transformers import (
     AdamW,
     T5ForConditionalGeneration,
     T5Tokenizer,
+    GPT2Tokenizer, 
+    GPT2Model,
     get_linear_schedule_with_warmup
 )
 
@@ -42,8 +44,8 @@ class T5FineTuner(pl.LightningModule):
         super(T5FineTuner, self).__init__()
         self.hparams = hparams
 
-        self.model = T5ForConditionalGeneration.from_pretrained(hparams.model_name_or_path)
-        self.tokenizer = T5Tokenizer.from_pretrained(hparams.tokenizer_name_or_path)
+        self.model = GPT2Model.from_pretrained(hparams.model_name_or_path)
+        self.tokenizer = GPT2Tokenizer.from_pretrained(hparams.tokenizer_name_or_path)
 
     def is_logger(self):
         return True
@@ -199,7 +201,8 @@ val_path = "boolq_data/boolq_val.csv"
 train = pd.read_csv(train_path)
 print (train.head())
 
-tokenizer = T5Tokenizer.from_pretrained('t5-base')
+# tokenizer = T5Tokenizer.from_pretrained('t5-base')
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
 
 class BooleanDataset(Dataset):
