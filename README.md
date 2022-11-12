@@ -1,10 +1,8 @@
-This repo is a clone of https://github.com/ramsrigouthamg/Questgen.ai
+# Baseline Model for Generating Curiosity   <br>
 
-# Questgen AI   <br>
+## Inspired from https://questgen.ai/  
 
-## Try advanced question generation models for free:  https://questgen.ai/  
-
-
+(This repo is a clone of https://github.com/ramsrigouthamg/Questgen.ai)
 Questgen AI is an opensource NLP library focused on developing easy to use Question generation algorithms.<br>
 It is on a quest build the world's most advanced question generation AI leveraging on state-of-the-art transformer models like T5, BERT and OpenAI GPT-2 etc.
 
