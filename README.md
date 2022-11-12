@@ -1,33 +1,15 @@
-This repo is a clone of https://github.com/ramsrigouthamg/Questgen.ai
+# Baseline Model for Generating Curiosity   <br>
 
-# Questgen AI   <br>
+## Inspired from https://questgen.ai/  
 
-## Try advanced question generation models for free:  https://questgen.ai/  
-
-
+(This repo is a clone of https://github.com/ramsrigouthamg/Questgen.ai)
 Questgen AI is an opensource NLP library focused on developing easy to use Question generation algorithms.<br>
 It is on a quest build the world's most advanced question generation AI leveraging on state-of-the-art transformer models like T5, BERT and OpenAI GPT-2 etc.
 
-## Online course and blog
+## Google Colab Demo
+Demo using T5 Transformer --> [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1XxycxY4exkwr8LL6SaUxwtA-osD0JFfc?usp=sharing)
 
- 🚀 [Our online course that teaches how to build these models from scratch and deploy them](https://www.udemy.com/course/question-generation-using-natural-language-processing/?referralCode=C8EA86A28F5398CBF763)
-
-[Blog announcing the launch](https://towardsdatascience.com/questgen-an-open-source-nlp-library-for-question-generation-algorithms-1e18067fcdc6)
-
-<img src= './quest.gif' >
-
-### Currently Supported Question Generation Capabilities :
-<pre>
-1. Multiple Choice Questions (MCQs)
-2. Boolean Questions (Yes/No)
-3. General FAQs
-4. Paraphrasing any Question  
-5. Question Answering.
-</pre>
-
-## Simple and Complete Google Colab Demo
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1CvgSjU48kN5jEtCU732soM723W1spGdm?usp=sharing)
-
+Demo using GPT-2 --> [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1XxycxY4exkwr8LL6SaUxwtA-osD0JFfc?usp=sharing)
 
 ## 1. Installation
 
@@ -47,92 +29,13 @@ tar -xvf  s2v_reddit_2015_md.tar.gz
 
 ## 2. Running the code
 
-### 2.1 Generate boolean (Yes/No) Questions
+### 2.1 Generate Simple Questions
+
 ```
-from pprint import pprint
-import nltk
-nltk.download('stopwords')
-from Questgen import main
-qe= main.BoolQGen()
+qg = main.QGen()
 payload = {
-            "input_text": "Sachin Ramesh Tendulkar is a former international cricketer from India and a former captain of the Indian national team. He is widely regarded as one of the greatest batsmen in the history of cricket. He is the highest run scorer of all time in International cricket."
+            "input_text": "Recently I went on a walk around campus that I really enjoyed. It was exciting because I had never been on this part of campus and I got to see lots of new places. It was fun to see a new side of campus!"
         }
-output = qe.predict_boolq(payload)
-pprint (output)
-```
-
-<details>
-<summary>Show Output</summary>
-
-```
-'Boolean Questions': ['Is sachin ramesh tendulkar the highest run scorer in '
-                       'cricket?',
-                       'Is sachin ramesh tendulkar the highest run scorer in '
-                       'cricket?',
-                       'Is sachin tendulkar the highest run scorer in '
-                       'cricket?']
-
-```
-</details>
-
-### 2.2 Generate MCQ Questions
-```
-    qg = main.QGen()
-    output = qg.predict_mcq(payload)
-    pprint (output)
-    
-```
-
-<details>
-<summary>Show Output</summary>
-            
-```
-    {'questions': [{'answer': 'cricketer',
-                'context': 'Sachin Ramesh Tendulkar is a former international '
-                           'cricketer from India and a former captain of the '
-                           'Indian national team.',
-                'extra_options': ['Mark Waugh',
-                                  'Sharma',
-                                  'Ricky Ponting',
-                                  'Afridi',
-                                  'Kohli',
-                                  'Dhoni'],
-                'id': 1,
-                'options': ['Brett Lee', 'Footballer', 'International Cricket'],
-                'options_algorithm': 'sense2vec',
-                'question_statement': "What is Sachin Ramesh Tendulkar's "
-                                      'career?',
-                'question_type': 'MCQ'},
-               {'answer': 'india',
-                'context': 'Sachin Ramesh Tendulkar is a former international '
-                           'cricketer from India and a former captain of the '
-                           'Indian national team.',
-                'extra_options': ['Pakistan',
-                                  'South Korea',
-                                  'Nepal',
-                                  'Philippines',
-                                  'Zimbabwe'],
-                'id': 2,
-                'options': ['Bangladesh', 'Indonesia', 'China'],
-                'options_algorithm': 'sense2vec',
-                'question_statement': 'Where is Sachin Ramesh Tendulkar from?',
-                'question_type': 'MCQ'},
-               {'answer': 'batsmen',
-                'context': 'He is widely regarded as one of the greatest '
-                           'batsmen in the history of cricket.',
-                'extra_options': ['Ashwin', 'Dhoni', 'Afridi', 'Death Overs'],
-                'id': 3,
-                'options': ['Bowlers', 'Wickets', 'Mccullum'],
-                'options_algorithm': 'sense2vec',
-                'question_statement': 'What is the best cricketer?',
-                'question_type': 'MCQ'}]}
-```
-</details> 
-
-
-### 2.3 Generate FAQ Questions
-
-```
 output = qg.predict_shortq(payload)
 pprint (output)
 ```
@@ -142,94 +45,41 @@ pprint (output)
 <summary>Show Output</summary>
 
  ```
- {'questions': [{'Answer': 'cricketer',
-                'Question': "What is Sachin Ramesh Tendulkar's career?",
-                'context': 'Sachin Ramesh Tendulkar is a former international '
-                           'cricketer from India and a former captain of the '
-                           'Indian national team.',
+ {'questions': [{'Question': 'I had never been on what part of campus before?', 'Answer': 'campus', 'id': 1, 'context': 'It was exciting because I had never been on this part of campus and I got to see lots of new places. Recently I went on a walk around campus that I really enjoyed. It was fun to see a new side of campus!'}, {'Question': 'How many new places did I see in this part of campus?', 'Answer': 'lots', 'id': 2, 'context': 'It was exciting because I had never been on this part of campus and I got to see lots of new places.'}, {'Question': 'What is the most enjoyable way to explore campus?', 'Answer': 'walk', 'id': 3, 'context': 'Recently I went on a walk around campus that I really enjoyed.'}, {'Question': 'What did I see in this part of campus?', 'Answer': 'new places', 'id': 4, 'context': 'It was exciting because I had never been on this part of campus and I got to see lots of new places.'}]}
+{'questions': [{'Answer': 'campus',
+                'Question': 'I had never been on what part of campus before?',
+                'context': 'It was exciting because I had never been on this '
+                           'part of campus and I got to see lots of new '
+                           'places. Recently I went on a walk around campus '
+                           'that I really enjoyed. It was fun to see a new '
+                           'side of campus!',
                 'id': 1},
-               {'Answer': 'india',
-                'Question': 'Where is Sachin Ramesh Tendulkar from?',
-                'context': 'Sachin Ramesh Tendulkar is a former international '
-                           'cricketer from India and a former captain of the '
-                           'Indian national team.',
+               {'Answer': 'lots',
+                'Question': 'How many new places did I see in this part of '
+                            'campus?',
+                'context': 'It was exciting because I had never been on this '
+                           'part of campus and I got to see lots of new '
+                           'places.',
                 'id': 2},
-               {'Answer': 'batsmen',
-                'Question': 'What is the best cricketer?',
-                'context': 'He is widely regarded as one of the greatest '
-                           'batsmen in the history of cricket.',
-                'id': 3}]
- }
+               {'Answer': 'walk',
+                'Question': 'What is the most enjoyable way to explore campus?',
+                'context': 'Recently I went on a walk around campus that I '
+                           'really enjoyed.',
+                'id': 3},
+               {'Answer': 'new places',
+                'Question': 'What did I see in this part of campus?',
+                'context': 'It was exciting because I had never been on this '
+                           'part of campus and I got to see lots of new '
+                           'places.',
+                'id': 4}],
+ 'statement': 'Recently I went on a walk around campus that I really enjoyed. '
+              'It was exciting because I had never been on this part of campus '
+              'and I got to see lots of new places. It was fun to see a new '
+              'side of campus!'}
  ```
 </details>
 
-### 2.4 Paraphrasing Questions
-```
-payload2 = {
-    "input_text" : "What is Sachin Tendulkar profession?",
-    "max_questions": 5
-}
-output = qg.paraphrase(payload2)
-pprint (output)
 
-```
-<details>
-<summary>Show Output</summary>
-            
-```
-{'Paraphrased Questions': ["ParaphrasedTarget: What is Sachin Tendulkar's "
-                           'profession?',
-                           "ParaphrasedTarget: What is Sachin Tendulkar's "
-                           'career?',
-                           "ParaphrasedTarget: What is Sachin Tendulkar's job?",
-                           'ParaphrasedTarget: What is Sachin Tendulkar?',
-                           "ParaphrasedTarget: What is Sachin Tendulkar's "
-                           'occupation?'],
- 'Question': 'What is Sachin Tendulkar profession?'}
-```
-</details>
-
-### 2.5 Question Answering (Simple)
-```
-answer = main.AnswerPredictor()
-payload3 = {
-    "input_text" : '''Sachin Ramesh Tendulkar is a former international cricketer from 
-              India and a former captain of the Indian national team. He is widely regarded 
-              as one of the greatest batsmen in the history of cricket. He is the highest
-               run scorer of all time in International cricket.''',
-    "input_question" : "Who is Sachin tendulkar ? "
-    
-}
-output = answer.predict_answer(payload3)
-
-```
-<details>
-<summary>Show Output</summary>
-            
-```
-Sachin ramesh tendulkar is a former international cricketer from india and a former captain of the indian national team.
-```
-</details>
-
-### 2.6 Question Answering (Boolean)
-```
-payload4 = {
-    "input_text" : '''Sachin Ramesh Tendulkar is a former international cricketer from 
-              India and a former captain of the Indian national team. He is widely regarded 
-              as one of the greatest batsmen in the history of cricket. He is the highest
-               run scorer of all time in International cricket.''',
-    "input_question" : "Is Sachin tendulkar  a former cricketer? "
-}
-output = answer.predict_answer(payload4)
-print (output)
-```
-<details>
-<summary>Show Output</summary>
-            
-```
-Yes, sachin tendulkar is a former cricketer.
-```
-</details>
 
 ### NLP models used
 
@@ -237,6 +87,3 @@ For maintaining meaningfulness in Questions, Questgen uses Three T5 models. One 
 
 ### Online Demo website.
 https://questgen.ai/
-
-
-[![Linkedin Link](linkedin.png)](https://www.linkedin.com/company/30182152/)
