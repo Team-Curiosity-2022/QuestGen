@@ -1,3 +1,5 @@
+This repo is a clone of https://github.com/ramsrigouthamg/Questgen.ai
+
 # Questgen AI   <br>
 
 ## Try advanced question generation models for free:  https://questgen.ai/  
